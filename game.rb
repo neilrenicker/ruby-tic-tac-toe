@@ -18,4 +18,28 @@ class Game
     score[2]
   end
 
+  def col1
+    [row1[0],row2[0],row3[0]]
+  end
+
+  def col2
+    [row1[1],row2[1],row3[1]]
+  end
+
+  def col3
+    [row1[2],row2[2],row3[2]]
+  end
+
+  def diagonal_left
+    [row1[0],row2[1],row3[2]]
+  end
+
+  def diagonal_right
+    [row1[2],row2[1],row3[0]]
+  end
+
+  def row_win
+    row1.uniq.count == 1
+  end
+
 end
