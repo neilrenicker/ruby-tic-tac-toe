@@ -1,4 +1,4 @@
-class Scorer < Game
+class Scorer
 
   attr_accessor :score
 
