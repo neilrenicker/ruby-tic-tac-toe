@@ -1,4 +1,4 @@
-class Game
+class Scorer
 
   attr_accessor :score
 
@@ -30,70 +30,33 @@ class Game
     [row1[2],row2[2],row3[2]]
   end
 
-  def diagonal_left
+  def diag_left
     [row1[0],row2[1],row3[2]]
   end
 
-  def diagonal_right
+  def diag_right
     [row1[2],row2[1],row3[0]]
   end
 
-  def row1_winner?
-    row1.uniq.count == 1
-  end
-
-  def row2_winner?
-    row2.uniq.count == 1
-  end
-
-  def row3_winner?
-    row3.uniq.count == 1
-  end
-
-  def column1_winner?
-    col1.uniq.count == 1
-  end
-
-  def column2_winner?
-    col2.uniq.count == 1
-  end
-
-  def column3_winner?
-    col3.uniq.count == 1
-  end
-
-  def diagonal_left_winner?
-    diagonal_left.uniq.count == 1
-  end
-
-  def diagonal_right_winner?
-    diagonal_right.uniq.count == 1
-  end
-
   def win_location
-    if row1_winner?
-      row1
-    elsif row2_winner?
-      row2
-    elsif row3_winner?
-      row3
-    elsif column1_winner?
-      col1
-    elsif column2_winner?
-      col2
-    elsif column3_winner?
-      col3
-    elsif diagonal_left_winner?
-      diagonal_left
-    elsif diagonal_right_winner?
-      diagonal_right                                  
+    possible_wins = [row1, row2, row3, col1, col2, col3, diag_left, diag_right]
+    possible_wins.detect do |location|
+      unless location.include?(0)
+        location if location.uniq.count == 1
+      end
     end
   end
 
+  def no_winner
+    win_location == nil
+  end
+
   def winner
-    if win_location.include?(1)
+    if no_winner
+      "no winner"
+    elsif win_location.include?(1)
       "player1"
-    elsif
+    else
       "player2"
     end
   end
