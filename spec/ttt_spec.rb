@@ -1,5 +1,5 @@
 require 'spec_helper.rb'
-require './game.rb'
+require './scorer.rb'
 
 describe Scorer do
   it "should have a starting scorer" do
