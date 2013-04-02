@@ -1,6 +1,18 @@
 require 'spec_helper.rb'
 require './game.rb'
 
+describe Game do
+  it "should begin a new game" do
+    game = Game.new
+  end
+
+  it "should begin with an initial score of all zeros" do
+    game = Game.new
+    game.current_score.should == [[0,0,0],[0,0,0],[0,0,0]]
+  end
+  
+end
+
 describe Scorer do
   it "should have a starting scorer" do
     score = Scorer.new

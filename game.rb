@@ -1,4 +1,18 @@
-class Scorer
+class Game
+
+  attr_accessor :current_score
+  
+  def initialize
+    @current_score = [[0,0,0],[0,0,0],[0,0,0]]
+  end
+
+  def printer
+    puts "1 2 3\n4 5 6\n7 8 9"
+  end
+
+end
+
+class Scorer < Game
 
   attr_accessor :score
 
