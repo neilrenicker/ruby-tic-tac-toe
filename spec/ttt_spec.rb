@@ -10,6 +10,74 @@ describe Game do
     game = Game.new
     game.current_score.should == [[0,0,0],[0,0,0],[0,0,0]]
   end
+
+  it "should detect if user's chosen piece is on row1" do
+    game = Game.new
+    game.row1_chosen?(1).should == true
+  end
+
+  it "should detect if user's chosen piece is on row2" do
+    game = Game.new
+    game.row2_chosen?(5).should == true
+  end
+
+  it "should detect if user's chosen piece is on row3" do
+    game = Game.new
+    game.row3_chosen?(9).should == true
+  end
+
+  it "should properly locate an input of '1'" do
+    game = Game.new
+    game.row_locator(1).should == 0
+  end
+
+  it "should properly locate an input of '4'" do
+    game = Game.new
+    game.row_locator(4).should == 1
+  end
+
+  it "should properly locate an input of '8'" do
+    game = Game.new
+    game.row_locator(8).should == 2
+  end
+
+  it "should update the first row score to [1,0,0] if a piece is placed at game block 1" do
+    game = Game.new
+    game.place_piece(1, 1)
+    game.current_score.should == [[1,0,0],[0,0,0],[0,0,0]]
+  end
+
+  it "should update the second row score to [1,0,0] if a piece is placed at game block 4" do
+    game = Game.new
+    game.place_piece(4, 1)
+    game.current_score.should == [[0,0,0],[1,0,0],[0,0,0]]
+  end
+
+  it "should update the third row score to [0,1,0] if a piece is placed at game block 8" do
+    game = Game.new
+    game.place_piece(8, 1)
+    game.current_score.should == [[0,0,0],[0,0,0],[0,1,0]]
+  end
+
+  it "should detect if a piece chosen would be placed on an already chosen block" do
+    game = Game.new
+    game.place_piece(5, 1)
+    game.already_chosen?(5).should be_true
+  end
+
+  it "should not allow a piece to be placed on an already chosen block" do
+    game = Game.new
+    game.place_piece(5, 1)
+    game.place_piece(5, 2)
+    game.current_score.should == [[0,0,0],[0,1,0],[0,0,0]]
+  end
+
+  it "should raise an error if a piece is placed on an already chosen block" do
+    game = Game.new
+    game.place_piece(5, 1)
+    game.place_piece(5, 2)
+    expect{game.place_piece}.to raise_error(InvalidMoveError)
+  end
   
 end
 

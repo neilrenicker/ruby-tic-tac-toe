@@ -1,13 +1,51 @@
 class Game
 
   attr_accessor :current_score
-  
+
   def initialize
     @current_score = [[0,0,0],[0,0,0],[0,0,0]]
   end
 
-  def printer
-    puts "1 2 3\n4 5 6\n7 8 9"
+  def row1_chosen?(piece)
+    (piece / 3.0 <= 1)
+  end
+
+  def row2_chosen?(piece)
+    (piece / 3.0 <= 2)
+  end
+
+  def row3_chosen?(piece)
+    (piece / 3.0 <= 3)
+  end
+
+  def row_locator(piece)
+    case
+      when row1_chosen?(piece) then 0
+      when row2_chosen?(piece) then 1
+      when row3_chosen?(piece) then 2
+    end
+  end
+
+  def column_locator(piece)
+    case
+      when row1_chosen?(piece) then piece - 1
+      when row2_chosen?(piece) then piece - 4
+      when row3_chosen?(piece) then piece - 7
+    end
+  end
+
+  def already_chosen?(piece)
+    row = row_locator(piece)
+    column = column_locator(piece)
+    @current_score[row][column] != 0
+  end
+
+  def place_piece(piece, player)
+    row = row_locator(piece)
+    column = column_locator(piece)
+    unless already_chosen?(piece)
+      @current_score[row][column] = player
+    end
   end
 
 end
