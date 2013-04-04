@@ -50,6 +50,55 @@ class Game
     end
   end
 
+  # Begin untested gameplay ---
+
+  def print_board
+    score = @current_score
+    a = score[0][0]
+    b = score[0][1]
+    c = score[0][2]
+    d = score[1][0]
+    e = score[1][1]
+    f = score[1][2]
+    g = score[2][0]
+    h = score[2][1]
+    i = score[2][2]
+    row1 = "#{a} #{b} #{c}"
+    row2 = "#{d} #{e} #{f}"
+    row3 = "#{g} #{h} #{i}"
+    puts "\n--------"
+    puts row1
+    puts row2
+    puts row3
+    puts "\n--------"
+  end
+
+  def player1_gameplay
+    player1 = 1
+    print_board
+    puts "Player 1, place your piece."
+    piece = gets.chomp().to_i
+    place_piece(piece, player1)
+  end
+
+  def player2_gameplay
+    player2 = 2
+    print_board
+    puts "\n--------"
+    puts "Player 2, place your piece."
+    piece = gets.chomp().to_i
+    place_piece(piece, player2)
+  end
+
+  def play
+    until game_over
+      player1_gameplay
+      player2_gameplay
+    end
+  end
+
+# End untested gameplay ---
+
 end
 
 class Scorer < Game
