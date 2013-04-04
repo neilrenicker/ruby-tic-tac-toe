@@ -43,7 +43,9 @@ class Game
   def place_piece(piece, player)
     row = row_locator(piece)
     column = column_locator(piece)
-    unless already_chosen?(piece)
+    if already_chosen?(piece)
+      raise "What are you thinking?! You can't move there!"
+    else
       @current_score[row][column] = player
     end
   end

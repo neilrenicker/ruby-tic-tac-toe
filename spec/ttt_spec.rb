@@ -65,18 +65,17 @@ describe Game do
     game.already_chosen?(5).should be_true
   end
 
-  it "should not allow a piece to be placed on an already chosen block" do
-    game = Game.new
-    game.place_piece(5, 1)
-    game.place_piece(5, 2)
-    game.current_score.should == [[0,0,0],[0,1,0],[0,0,0]]
-  end
-
   it "should raise an error if a piece is placed on an already chosen block" do
     game = Game.new
     game.place_piece(5, 1)
-    game.place_piece(5, 2)
-    expect{game.place_piece}.to raise_error(InvalidMoveError)
+    expect { game.place_piece(5, 2) }.to raise_error(RuntimeError)
+  end
+
+  it "should not allow a piece to be placed on an already chosen block" do
+    game = Game.new
+    game.place_piece(5, 1)
+    expect { game.place_piece(5, 2) }.to raise_error(RuntimeError)
+    game.current_score.should == [[0,0,0],[0,1,0],[0,0,0]]
   end
   
 end
